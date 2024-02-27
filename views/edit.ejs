@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Product</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Edit Product</h1>
+    <form action="/update/<%= product.id %>" method="POST">
+      <div class="form-group">
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id" class="form-control" value="<%= product.id %>" readonly>
+      </div>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" class="form-control" value="<%= product.name %>" required>
+      </div>
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" class="form-control" value="<%= product.price %>" required>
+      </div>
+      <div class="form-group">
+        <label for="is_available">Is Available:</label>
+        <div class="radio">
+          <label>
+            <input type="radio" name="is_available" value="true" <%= product.is_available ? 'checked' : '' %>> Yes
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="is_available" value="false" <%= !product.is_available ? 'checked' : '' %>> No
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="category_name">Category:</label>
+        <select id="category_name" name="category_name" class="form-control">
+          <option value="electronics" <%= product.category === 'electronics' ? 'selected' : '' %>>Electronics</option>
+          <option value="food" <%= product.category === 'food' ? 'selected' : '' %>>Food</option>
+          <option value="furniture" <%= product.category === 'furniture' ? 'selected' : '' %>>Furniture</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+  </div>
+</body>
+</html>

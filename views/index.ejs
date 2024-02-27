@@ -1,0 +1,44 @@
+<%- include("header") %>
+<div class="container">
+  <h1>Products List</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Availability</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Options</th>
+        <th>Cart Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% products.forEach(product => { %>
+        <tr>
+          <td><%= product.id %></td>
+          <td><%= product.name %></td>
+          <td><%= product.is_available ? 'Available' : 'Not Available' %></td>
+          <td>$<%= product.price %></td>
+          <td><%= product.category %></td>
+          <td>
+            <a href="/edit/<%= product.id %>" class="btn btn-sm btn-primary">Edit</a>
+            <a href="#" class="delete-link btn btn-sm btn-danger" data-id="<%= product.id %>">Delete</a>
+          </td>
+          <td>
+            <% if (product.is_available) { %>
+              <form action="/add-to-cart" method="POST" class="d-flex">
+                <input type="hidden" name="id" value="<%= product.id %>">
+                <input type="number" name="quantity" min="1" value="1" class="form-control me-2">
+                <button type="submit" class="add-to-cart-btn btn btn-success">Add to Cart</button>
+              </form>
+            <% } else { %>
+              <span class="text-danger">Out of Stock</span>
+            <% } %>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>
+<%- include("footer") %>
